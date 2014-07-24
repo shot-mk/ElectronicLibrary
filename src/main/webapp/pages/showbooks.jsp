@@ -44,19 +44,22 @@
                             </div>
                             <div class="modal-body">
                                 <div align="left">
-                                    <p><strong>Short description : </strong> ${book.description}</p>
+                                    <p><img src="service/image/${book.id}"/></p> <br>
+
+                                    <p><strong>Description : </strong> ${book.description}</p>
 
                                     <p><strong>Author : </strong> ${book.author}</p>
 
-                                    <p><strong>Publisher : </strong> ${book.publisher} </p>
-                                    <h> File :</h>
+                                    <p><strong>Publisher : </strong> ${book.publisher} </p><br>
+
+                                    <h2> File :</h2>
+
                                     <p><strong>Format : </strong> ${book.format} </p>
 
-                                    <p><strong>Size : </strong> ${book.size} </p>
+                                    <p><strong>Size : </strong> ${book.size} bytes </p>
 
                                     <p><strong>File Name : </strong> ${book.filename} </p>
 
-                                    <p><img src="service/image/${book.id}"/></p>
 
                                 </div>
                             </div>
