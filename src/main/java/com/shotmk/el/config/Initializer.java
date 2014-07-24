@@ -1,4 +1,4 @@
-package com.shotmk.EL.config;
+package com.shotmk.el.config;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;

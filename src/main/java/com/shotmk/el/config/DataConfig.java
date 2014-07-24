@@ -1,4 +1,4 @@
-package com.shotmk.EL.config;
+package com.shotmk.el.config;
 
 
 import org.hibernate.ejb.HibernatePersistence;
@@ -19,9 +19,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.shotmk.EL")
+@ComponentScan("com.shotmk.el")
 @PropertySource("classpath:app.properties")
-@EnableJpaRepositories("com.shotmk.EL.repository")
+@EnableJpaRepositories("com.shotmk.el.repository")
 public class DataConfig {
 
     private static final String PROP_DATABASE_DRIVER = "db.driver";

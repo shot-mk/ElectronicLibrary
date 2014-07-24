@@ -1,4 +1,4 @@
-package com.shotmk.EL.entity;
+package com.shotmk.el.entity;
 
 
 import org.hibernate.annotations.Type;

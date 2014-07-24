@@ -1,6 +1,6 @@
-package com.shotmk.EL.services;
+package com.shotmk.el.services;
 
-import com.shotmk.EL.entity.Book;
+import com.shotmk.el.entity.Book;
 
 import java.util.List;
 

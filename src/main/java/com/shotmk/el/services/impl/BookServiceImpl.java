@@ -1,13 +1,11 @@
-package com.shotmk.EL.services.impl;
+package com.shotmk.el.services.impl;
 
 
-import com.shotmk.EL.entity.Book;
-import com.shotmk.EL.repository.BookRepository;
-import com.shotmk.EL.services.BookService;
+import com.shotmk.el.entity.Book;
+import com.shotmk.el.repository.BookRepository;
+import com.shotmk.el.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 

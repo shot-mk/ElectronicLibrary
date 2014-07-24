@@ -1,6 +1,6 @@
-package com.shotmk.EL.web.admin;
+package com.shotmk.el.web.admin;
 
-import com.shotmk.EL.services.BookService;
+import com.shotmk.el.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

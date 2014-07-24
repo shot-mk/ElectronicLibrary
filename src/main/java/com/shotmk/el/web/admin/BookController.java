@@ -1,8 +1,8 @@
-package com.shotmk.EL.web.admin;
+package com.shotmk.el.web.admin;
 
-import com.shotmk.EL.entity.Book;
-import com.shotmk.EL.services.BookService;
-import com.shotmk.EL.wrappers.FileWrapper;
+import com.shotmk.el.entity.Book;
+import com.shotmk.el.services.BookService;
+import com.shotmk.el.wrappers.FileWrapper;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

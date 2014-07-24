@@ -23,10 +23,10 @@
     <c:forEach var="book" items="${bookList}">
         <tr>
             <td>
-                ${book.getId()}
+                    ${book.id}
             </td>
             <td>
-                ${book.getName()}
+                    ${book.name}
             </td>
             <td>
                 <a id="modal-600072" href="#modal-container-600072" role="button" class="btn" data-toggle="modal"><span
@@ -44,19 +44,19 @@
                             </div>
                             <div class="modal-body">
                                 <div align="left">
-                                    <p><strong>Short description : </strong> ${book.getDescription()}</p>
+                                    <p><strong>Short description : </strong> ${book.description}</p>
 
-                                    <p><strong>Author : </strong> ${book.getAuthor()}</p>
+                                    <p><strong>Author : </strong> ${book.author}</p>
 
-                                    <p><strong>Publisher : </strong> ${book.getPublisher()} </p>
+                                    <p><strong>Publisher : </strong> ${book.publisher} </p>
                                     <h> File :</h>
-                                    <p><strong>Format : </strong> ${book.getFormat()} </p>
+                                    <p><strong>Format : </strong> ${book.format} </p>
 
-                                    <p><strong>Size : </strong> ${book.getSize()} </p>
+                                    <p><strong>Size : </strong> ${book.size} </p>
 
-                                    <p><strong>File Name : </strong> ${book.getFilename()} </p>
+                                    <p><strong>File Name : </strong> ${book.filename} </p>
 
-                                    <p><img src="service/image/${book.getId()}"/></p>
+                                    <p><img src="service/image/${book.id}"/></p>
 
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
             </td>
             <td>
                 <form action="service/deletebook" method="post">
-                <input class="hidden" name="deleteBook" value="${book.getId()}"/>
+                    <input class="hidden" name="deleteBook" value="${book.id}"/>
                     <button type="submit" class="btn btn-sm btn-default" name="action" value="deleteBook"><span class="glyphicon glyphicon-trash"></span></button>
                 </form>
 

@@ -1,4 +1,4 @@
-package com.shotmk.EL.wrappers;
+package com.shotmk.el.wrappers;
 
 public class FileWrapper {
 

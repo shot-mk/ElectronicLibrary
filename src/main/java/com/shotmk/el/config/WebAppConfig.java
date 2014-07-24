@@ -1,11 +1,10 @@
-package com.shotmk.EL.config;
+package com.shotmk.el.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.shotmk.EL")
+@ComponentScan("com.shotmk.el")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -40,8 +39,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         mr.setMaxUploadSize(20000000);
         return mr;
     }
-
-
 
 
 }
