@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <jsp:include page="head.jsp"/>
@@ -116,6 +117,24 @@
                         </div>
                     </div>
                 </div>
+                <c:if test="${fn:length(errorMsgs) > 0}">
+
+                    <div class="col-md-4 column">
+                        <div class="alert alert-warning alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h4>
+                                Warning
+                            </h4>
+                            <ul>
+                                <c:forEach items="${errorMsgs}" var="error">
+                                    <li><c:out value="${error}"/></li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+
+                </c:if>
+
             </div>
             <p></p>
             <jsp:include page="showbooks.jsp"></jsp:include>

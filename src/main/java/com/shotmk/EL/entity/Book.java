@@ -1,6 +1,5 @@
 package com.shotmk.EL.entity;
 
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -27,6 +26,8 @@ public class Book implements Serializable{
     @Size(max = 3)
     String format;
 
+    String filename;
+
     @Lob
     @Column(length = 20000000)
     byte[] book;
@@ -40,12 +41,13 @@ public class Book implements Serializable{
     public Book() {
     }
 
-    public Book(String name, String publisher, String author, String description, String format, byte[] book, byte[] image, double size) {
+    public Book(String name, String publisher, String author, String description, String format, String filename, byte[] book, byte[] image, double size) {
         this.name = name;
         this.publisher = publisher;
         this.author = author;
         this.description = description;
         this.format = format;
+        this.filename = filename;
         this.book = book;
         this.image = image;
         this.size = size;
@@ -123,4 +125,11 @@ public class Book implements Serializable{
         this.size = size;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 }

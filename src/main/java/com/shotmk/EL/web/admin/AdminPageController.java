@@ -10,7 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AdminPageController {
 
     @RequestMapping(method = RequestMethod.GET)
-    public String start(Model model) {
+    public void start(Model model) {
+        postStart(model);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String postStart(Model model) {
         return "admin";
     }
 
