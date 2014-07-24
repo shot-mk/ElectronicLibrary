@@ -72,7 +72,7 @@ public class BookController {
             byte[] aBook = fileWrapper.getFile();
             String extension = fileWrapper.getExtension();
             String filename = fileWrapper.getFileName();
-            byte[] aImage = null;
+            byte[] aImage = imageWrapper.getFile();
             int size = aBook.length;
             Book newBook = new Book(title, publisher, author, description, extension, filename, aBook, aImage, size);
             bookService.addBook(newBook);
@@ -120,7 +120,7 @@ public class BookController {
             int height = src.getHeight();
             int width = src.getWidth();
             if (height > IMAGE_MAX_HEIGHT || width > IMAGE_MAX_WIDTH) {
-                addError("Incorrect image size. 800x600 is required");
+                addError("Incorrect image size. 800x600 or less is required.");
                 attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
             } else {
                 imageWrapper.setFile(image.getBytes());
@@ -134,6 +134,13 @@ public class BookController {
 
     }
 
+    @RequestMapping("/image/{id}")
+    public byte[] showImage(@PathVariable String id) {
+        int intID = Integer.parseInt(id);
+        byte[] image = bookService.getBook(intID).getBook();
+        return image;
+    }
+
     private void addError(String msg) {
         this.errorMsgs.add(msg);
     }
@@ -143,11 +150,11 @@ public class BookController {
         return "redirect:/index";
     }
 
-    @RequestMapping(value =  "/deletebook/{bookid}", method = RequestMethod.POST)
-    public String deleteBook(@PathVariable("bookId") int id) {
+    @RequestMapping(value = "/deletebook", method = RequestMethod.POST)
+    public String deleteBook(@RequestParam("deleteBook") int id) {
         Book book = bookService.getBook(id);
         bookService.deleteBook(book);
-        return "redirect:/index";
+        return "redirect:/admin";
     }
 
 

@@ -1,6 +1,8 @@
 package com.shotmk.EL.entity;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -32,8 +34,9 @@ public class Book implements Serializable{
     @Column(length = 20000000)
     byte[] book;
 
-    @Lob
+
     @Column(length = 100000)
+    @Type(type = "image")
     byte[] image;
 
     double size;
