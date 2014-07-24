@@ -132,6 +132,18 @@
                             </ul>
                         </div>
                     </div>
+                </c:if>
+                <c:if test="${fn:length(successMsg) > 0}">
+
+                    <div class="col-md-4 column">
+                        <div class="alert alert-success alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h4>
+                                Success
+                            </h4>
+                            <c:out value="${successMsg}"/>
+                        </div>
+                    </div>
 
                 </c:if>
 

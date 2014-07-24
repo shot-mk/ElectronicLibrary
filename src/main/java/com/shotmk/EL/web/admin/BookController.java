@@ -2,7 +2,7 @@ package com.shotmk.EL.web.admin;
 
 import com.shotmk.EL.entity.Book;
 import com.shotmk.EL.services.BookService;
-import com.shotmk.EL.wrappers.BookFileWrapper;
+import com.shotmk.EL.wrappers.FileWrapper;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,9 +30,15 @@ public class BookController {
 
     private Set<String> allowedBookExtensions;
 
+    private Set<String> allowedImageExtensions;
+
     private List<String> errorMsgs = new ArrayList<String>();
 
     private Integer BOOK_MAX_SIZE = 20000000;
+
+    private Integer IMAGE_MAX_WIDTH = 600;
+
+    private Integer IMAGE_MAX_HEIGHT = 800;
 
     @Autowired
     private BookService bookService;
@@ -41,6 +50,11 @@ public class BookController {
         allowedBookExtensions.add("doc");
         allowedBookExtensions.add("odt");
         allowedBookExtensions.add("pdf");
+        this.allowedImageExtensions = new HashSet<String>();
+        allowedImageExtensions.add("jpg");
+        allowedImageExtensions.add("jpeg");
+        allowedBookExtensions.add("bmp");
+        allowedBookExtensions.add("png");
 
     }
 
@@ -50,25 +64,29 @@ public class BookController {
         String author = req.getParameter("author");
         String publisher = req.getParameter("publisher");
         String description = req.getParameter("description");
-        BookFileWrapper bookFileWrapper = new BookFileWrapper();
-        bookUploadAndValidate(book, bookFileWrapper, attributes);
-        if (bookFileWrapper.getFileName() != null) {
-            byte[] aBook = bookFileWrapper.getBook();
-            String extension = bookFileWrapper.getExtension();
-            String filename = bookFileWrapper.getFileName();
+        FileWrapper fileWrapper = new FileWrapper();
+        FileWrapper imageWrapper = new FileWrapper();
+        bookUploadAndValidate(book, fileWrapper, attributes);
+        imageUploadAndValidate(image, imageWrapper, attributes);
+        if (fileWrapper.getFileName() != null && imageWrapper.getFileName() != null) {
+            byte[] aBook = fileWrapper.getFile();
+            String extension = fileWrapper.getExtension();
+            String filename = fileWrapper.getFileName();
             byte[] aImage = null;
             int size = aBook.length;
             Book newBook = new Book(title, publisher, author, description, extension, filename, aBook, aImage, size);
             bookService.addBook(newBook);
+            String successMessage = "Book successfully added";
+            attributes.addFlashAttribute("successMsg", successMessage);
         }
         return "redirect:/admin";
     }
 
 
-    private void bookUploadAndValidate(@RequestParam("book") MultipartFile book, BookFileWrapper bookFileWrapper, RedirectAttributes attributes) {
+    private void bookUploadAndValidate(@RequestParam("book") MultipartFile book, FileWrapper bookWrapper, RedirectAttributes attributes) {
         String extension = FilenameUtils.getExtension(book.getOriginalFilename());
         if (!this.allowedBookExtensions.contains(extension)) {
-            addError("Incorrect file extension - only txt, rtf, doc, odt, pdf are allowed");
+            addError("Incorrect file extension - only txt, rtf, doc, odt, pdf are allowed.");
             attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
         } else if (book.getSize() > BOOK_MAX_SIZE) {
             addError("File is too big. File size must be less then 20Mb.");
@@ -82,10 +100,38 @@ public class BookController {
                 addError(e.getLocalizedMessage());
                 attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
             }
-            bookFileWrapper.setBook(aBook);
-            bookFileWrapper.setExtension(extension);
-            bookFileWrapper.setFileName(filename);
+            bookWrapper.setFile(aBook);
+            bookWrapper.setExtension(extension);
+            bookWrapper.setFileName(filename);
         }
+    }
+
+    private void imageUploadAndValidate(@RequestParam("image") MultipartFile image, FileWrapper imageWrapper, RedirectAttributes attributes) {
+
+        try {
+
+            String extension = FilenameUtils.getExtension(image.getOriginalFilename());
+            if (!this.allowedImageExtensions.contains(extension)) {
+                addError("Incorrect image extension - only jpg, bmp, png are allowed.");
+                attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
+                return;
+            }
+            BufferedImage src = ImageIO.read(new ByteArrayInputStream(image.getBytes()));
+            int height = src.getHeight();
+            int width = src.getWidth();
+            if (height > IMAGE_MAX_HEIGHT || width > IMAGE_MAX_WIDTH) {
+                addError("Incorrect image size. 800x600 is required");
+                attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
+            } else {
+                imageWrapper.setFile(image.getBytes());
+                imageWrapper.setFileName(image.getName());
+                imageWrapper.setExtension(extension);
+            }
+        } catch (IOException e) {
+            addError(e.getLocalizedMessage());
+            attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
+        }
+
     }
 
     private void addError(String msg) {

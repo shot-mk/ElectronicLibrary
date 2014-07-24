@@ -1,22 +1,22 @@
 package com.shotmk.EL.wrappers;
 
-public class BookFileWrapper {
+public class FileWrapper {
 
     private String fileName;
     private String extension;
-    private byte[] book;
+    private byte[] file;
 
 
-    public BookFileWrapper() {
+    public FileWrapper() {
         this.fileName = null;
         this.extension = null;
-        this.book = null;
+        this.file = null;
     }
 
-    public BookFileWrapper(String fileName, String extension, byte[] book) {
+    public FileWrapper(String fileName, String extension, byte[] file) {
         this.fileName = fileName;
         this.extension = extension;
-        this.book = book;
+        this.file = file;
     }
 
     public String getFileName() {
@@ -35,11 +35,11 @@ public class BookFileWrapper {
         this.extension = extension;
     }
 
-    public byte[] getBook() {
-        return book;
+    public byte[] getFile() {
+        return file;
     }
 
-    public void setBook(byte[] book) {
-        this.book = book;
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 }
