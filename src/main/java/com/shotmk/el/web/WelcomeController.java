@@ -14,7 +14,7 @@ import javax.annotation.PostConstruct;
 
 @Controller
 @RequestMapping("/")
-public class MainController {
+public class WelcomeController {
 
     @Autowired
     private UserService userService;

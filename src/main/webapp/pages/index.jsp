@@ -41,6 +41,9 @@
             <sec:authorize access="hasRole('ADMIN')">
                 <p><a class="btn btn-lg btn-success" href="<c:url value="/admin" />" role="button">Enter</a></p>
             </sec:authorize>
+            <sec:authorize access="hasRole('USER')">
+                <p><a class="btn btn-lg btn-success" href="<c:url value="/mainpage" />" role="button">Enter</a></p>
+            </sec:authorize>
             <p><a class="btn btn-lg btn-danger" href="<c:url value="/logout" />" role="button">Log out</a></p>
         </sec:authorize>
         <p><a class="btn btn-lg btn-success" href="<c:url value="/register" />" role="button">Register</a></p>

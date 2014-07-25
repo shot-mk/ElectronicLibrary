@@ -16,8 +16,11 @@
                 </h1>
             </div>
             <ul class="nav nav-tabs nav-justified">
+                <li>
+                    <a href="./mainpage"><strong>MainPage</strong></a>
+                </li>
                 <li class="active">
-                    <a href="./Administrating"><strong>Administrating</strong></a>
+                    <a href="./admin"><strong>Administrating</strong></a>
                 </li>
                 <li>
                     <a href="./logout">Logout</a>

@@ -45,7 +45,7 @@
                             </div>
                             <div class="modal-body">
                                 <div align="left">
-                                    <p><img src="service/image/${book.id}"/></p> <br>
+                                    <p><img src="image/${book.id}"/></p> <br>
 
                                     <p><strong>Description : </strong> ${book.description}</p>
 

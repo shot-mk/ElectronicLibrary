@@ -6,7 +6,9 @@ import com.shotmk.el.wrappers.FileWrapper;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,7 +25,7 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/service")
-public class BookController {
+public class AdminBookController {
 
     private Set<String> allowedBookExtensions;
 
@@ -40,7 +42,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    public BookController() {
+    public AdminBookController() {
         this.allowedBookExtensions = new HashSet<>();
         allowedBookExtensions.add("txt");
         allowedBookExtensions.add("rtf");
@@ -129,15 +131,6 @@ public class BookController {
             attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
         }
 
-    }
-
-    @RequestMapping("/image/{id}")
-    public
-    @ResponseBody
-    byte[] showImage(@PathVariable String id) {
-        int intID = Integer.parseInt(id);
-        byte[] image = bookService.getBook(intID).getImage();
-        return image;
     }
 
 

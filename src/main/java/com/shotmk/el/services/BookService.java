@@ -14,4 +14,7 @@ public interface BookService {
 
     public void deleteBook(Book book);
 
+    public Book findByName(String name);
+
+
 }

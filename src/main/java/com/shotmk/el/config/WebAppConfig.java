@@ -34,7 +34,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         resolver.setPrefix("/pages/");
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
-
         return resolver;
     }
 
