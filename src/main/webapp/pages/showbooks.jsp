@@ -29,17 +29,18 @@
                     ${book.name}
             </td>
             <td>
-                <a id="modal-600072" href="#modal-container-600072" role="button" class="btn" data-toggle="modal"><span
+                <c:set var="id" value="${book.id}"/>
+                <a id="modal-${id}" href="#modal-container-${id}" role="button" class="btn" data-toggle="modal"><span
                         class="glyphicon glyphicon-info-sign"></span></a>
 
-                <div class="modal fade" id="modal-container-600072" role="dialog" aria-labelledby="myModalLabel"
+                <div class="modal fade" id="modal-container-${id}" role="dialog" aria-labelledby="myModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                                <h4 class="modal-title" id="myModalLabel">
-                                    # ${book.getName()}
+                                <h4 class="modal-title" id="myModalLabel${id}">
+                                    # ${book.name}
                                 </h4>
                             </div>
                             <div class="modal-body">

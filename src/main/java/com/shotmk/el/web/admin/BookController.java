@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,13 +41,13 @@ public class BookController {
     private BookService bookService;
 
     public BookController() {
-        this.allowedBookExtensions = new HashSet<String>();
+        this.allowedBookExtensions = new HashSet<>();
         allowedBookExtensions.add("txt");
         allowedBookExtensions.add("rtf");
         allowedBookExtensions.add("doc");
         allowedBookExtensions.add("odt");
         allowedBookExtensions.add("pdf");
-        this.allowedImageExtensions = new HashSet<String>();
+        this.allowedImageExtensions = new HashSet<>();
         allowedImageExtensions.add("jpg");
         allowedImageExtensions.add("jpeg");
         allowedBookExtensions.add("bmp");
@@ -56,7 +55,7 @@ public class BookController {
 
     }
 
-    @RequestMapping(value =  "/addbook", method = RequestMethod.POST)
+    @RequestMapping(value = "/addbook", method = RequestMethod.POST)
     public String addBook(RedirectAttributes attributes, HttpServletRequest req, @RequestParam("book") MultipartFile book, @RequestParam("image") MultipartFile image) throws ServletException {
         String title = req.getParameter("bookName");
         String author = req.getParameter("author");
@@ -135,7 +134,7 @@ public class BookController {
     @RequestMapping("/image/{id}")
     public
     @ResponseBody
-    byte[] showImage(@PathVariable String id, HttpServletResponse response) {
+    byte[] showImage(@PathVariable String id) {
         int intID = Integer.parseInt(id);
         byte[] image = bookService.getBook(intID).getImage();
         return image;
@@ -146,7 +145,7 @@ public class BookController {
         this.errorMsgs.add(msg);
     }
 
-    @RequestMapping(value =  "/getbooks", method = RequestMethod.POST)
+    @RequestMapping(value = "/getbooks", method = RequestMethod.POST)
     public String getBooks() {
         return "redirect:/index";
     }
@@ -157,8 +156,6 @@ public class BookController {
         bookService.deleteBook(book);
         return "redirect:/admin";
     }
-
-
 
 
 }

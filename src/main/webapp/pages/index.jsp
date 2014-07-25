@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,19 @@
 
     <div class="jumbotron" style="margin-top: 20px;">
         <h1>ElectronicLibrary.com</h1>
-        <p class="lead">ElectronicLibrary - это сервис предоставляющий всем желающим возможность скачивать книги.</p>
+
+        <p class="lead">ElectronicLibrary - this service let you to search, and upload books.</p>
+        <sec:authorize access="!isAuthenticated()">
+            <p><a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Log In</a></p>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <p>You are : <sec:authentication property="principal.username"/></p>
+            <sec:authorize access="hasRole('ADMIN')">
+                <p><a class="btn btn-lg btn-success" href="<c:url value="/admin" />" role="button">Enter</a></p>
+            </sec:authorize>
+            <p><a class="btn btn-lg btn-danger" href="<c:url value="/logout" />" role="button">Log out</a></p>
+        </sec:authorize>
+        <p><a class="btn btn-lg btn-success" href="<c:url value="/register" />" role="button">Register</a></p>
 
     </div>
 
