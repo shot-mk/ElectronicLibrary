@@ -71,7 +71,7 @@
                                     </p>
 
                                     <p>
-                                        <a class="btn btn-primary btn-large" href="#">Look</a>
+                                        <a class="btn btn-primary btn-large" href="./book/show/${book.id}">Look</a>
                                     </p>
                                 </div>
                             </div>
