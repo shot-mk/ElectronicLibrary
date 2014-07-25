@@ -56,5 +56,4 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         return converter;
     }
 
-
 }
