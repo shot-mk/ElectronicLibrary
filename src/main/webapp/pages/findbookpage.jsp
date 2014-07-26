@@ -34,7 +34,7 @@
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <form class="form-horizontal" role="form"
-                          action="${pageContext.servletContext.contextPath}/book/findbook/name" method="post">
+                          action="${pageContext.servletContext.contextPath}/book/findbook" method="post">
                         <h3>Find Book </h3>
 
                         <div class="form-group col-md-6">
@@ -73,46 +73,6 @@
                     </form>
 
                     <br/>
-                    <c:url var="firstUrl" value="/mainpage/1"/>
-                    <c:url var="lastUrl" value="/mainpage/${page.totalPages}"/>
-                    <c:url var="prevUrl" value="/mainpage/${currentIndex - 1}"/>
-                    <c:url var="nextUrl" value="/mainpage/${currentIndex + 1}"/>
-
-                    <div>
-                        <ul class="pagination">
-                            <c:choose>
-                                <c:when test="${currentIndex == 1}">
-                                    <li class="disabled"><a href="#">&lt;&lt;</a></li>
-                                    <li class="disabled"><a href="#">&lt;</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="${firstUrl}">&lt;&lt;</a></li>
-                                    <li><a href="${prevUrl}">&lt;</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                            <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
-                                <c:url var="pageUrl" value="/mainpage/${i}"/>
-                                <c:choose>
-                                    <c:when test="${i == currentIndex}">
-                                        <li class="active"><a href="${pageUrl}"><c:out value="${i}"/></a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li><a href="${pageUrl}"><c:out value="${i}"/></a></li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                            <c:choose>
-                                <c:when test="${currentIndex == page.totalPages}">
-                                    <li class="disabled"><a href="#">&gt;</a></li>
-                                    <li class="disabled"><a href="#">&gt;&gt;</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="${nextUrl}">&gt;</a></li>
-                                    <li><a href="${lastUrl}">&gt;&gt;</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </ul>
-                    </div>
 
                     <c:forEach var="book" items="${bookList}">
 

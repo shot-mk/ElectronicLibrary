@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 @Controller
 @RequestMapping("/book")
@@ -73,5 +74,22 @@ public class UserBookController {
         Comment comment = new Comment(parent, book, user, commentString);
         commentService.addComment(comment);
         return "redirect:/book/show/" + book.getId();
+    }
+
+    @RequestMapping(value = "/findbook/name", method = RequestMethod.POST)
+    public String findBookByName(HttpServletRequest request, Model model) {
+        String name = request.getParameter("bookName");
+        List<Book> bookList = bookService.findByName(name);
+        model.addAttribute("bookList", bookList);
+        return "findbookpage";
+    }
+
+    @RequestMapping(value = "/findbook/description", method = RequestMethod.POST)
+    public String findBookByDescripton(HttpServletRequest request, Model model) {
+        String description = request.getParameter("bookDescription");
+        List<Book> bookList = bookService.findByDescription(description);
+        model.addAttribute("bookList", bookList);
+        return "findbookpage";
+
     }
 }

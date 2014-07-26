@@ -1,6 +1,7 @@
 package com.shotmk.el.services;
 
 import com.shotmk.el.entity.Book;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -14,7 +15,11 @@ public interface BookService {
 
     public void deleteBook(Book book);
 
-    public Book findByName(String name);
+    public List<Book> findByName(String name);
+
+    public List<Book> findByDescription(String description);
+
+    public Page<Book> getBookPage(Integer pageNumber);
 
 
 }

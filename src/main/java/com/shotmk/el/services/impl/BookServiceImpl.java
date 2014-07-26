@@ -5,12 +5,16 @@ import com.shotmk.el.entity.Book;
 import com.shotmk.el.repository.BookRepository;
 import com.shotmk.el.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
+
+    private static final int PAGE_SIZE = 4;
 
     @Autowired
     private BookRepository bookRepository;
@@ -42,8 +46,19 @@ public class BookServiceImpl implements BookService {
 
     @Override
 
-    public Book findByName(String name) {
+    public List<Book> findByName(String name) {
         return bookRepository.findByName(name);
     }
 
+
+    @Override
+    public List<Book> findByDescription(String description) {
+        return bookRepository.findByDescription(description);
+    }
+
+    public Page<Book> getBookPage(Integer pageNumber) {
+        PageRequest request =
+                new PageRequest(pageNumber - 1, PAGE_SIZE);
+        return bookRepository.findAll(request);
+    }
 }
