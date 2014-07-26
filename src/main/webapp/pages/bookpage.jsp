@@ -60,6 +60,32 @@
                     </div>
                 </div>
             </div>
+            <br/>
+
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <form role="form" action="../addcomment" method="post">
+
+                        <div class="form-group">
+                            <label for="comment">Enter your comment</label>
+                            <textarea maxlength="500" rows="5" class="form-control" id="comment" name="comment"
+                                      required="required"> </textarea>
+                            <input class="hidden" name="user"
+                                   value="<sec:authentication property="principal.username"/>"/>
+                            <input class="hidden" name="bookId" value="${book.id}"/>
+                            <input class="hidden" name="parentId" value="0"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <jsp:include page="comment.jsp"/>
+                </div>
+            </div>
         </div>
     </div>
 </div>

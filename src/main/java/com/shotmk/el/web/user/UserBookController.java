@@ -1,14 +1,20 @@
 package com.shotmk.el.web.user;
 
 import com.shotmk.el.entity.Book;
+import com.shotmk.el.entity.Comment;
+import com.shotmk.el.entity.User;
 import com.shotmk.el.services.BookService;
+import com.shotmk.el.services.CommentService;
+import com.shotmk.el.services.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,10 +27,19 @@ public class UserBookController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private UserService userService;
+
+
+
     @RequestMapping("/show/{bookId}")
     public String start(@PathVariable("bookId") Integer bookId, Model model) {
         Book book = bookService.getBook(bookId);
         model.addAttribute("book", book);
+        model.addAttribute("commentService", commentService);
         return "bookpage";
 
     }
@@ -47,5 +62,16 @@ public class UserBookController {
             e.printStackTrace();
         }
         return "redirect:/book/" + bookId;
+    }
+
+    @RequestMapping(value = "/addcomment", method = RequestMethod.POST)
+    public String addComment(HttpServletRequest request) {
+        Book book = bookService.getBook(Integer.valueOf(request.getParameter("bookId")));
+        User user = userService.getUser(request.getParameter("user"));
+        Comment parent = commentService.getComment(Integer.valueOf(request.getParameter("parentId")));
+        String commentString = request.getParameter("comment");
+        Comment comment = new Comment(parent, book, user, commentString);
+        commentService.addComment(comment);
+        return "redirect:/book/show/" + book.getId();
     }
 }

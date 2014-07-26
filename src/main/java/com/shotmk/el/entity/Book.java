@@ -6,6 +6,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -40,6 +42,9 @@ public class Book implements Serializable{
     byte[] image;
 
     double size;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "book")
+    private List<Comment> comments;
 
     public Book() {
     }
@@ -135,4 +140,14 @@ public class Book implements Serializable{
     public void setFilename(String filename) {
         this.filename = filename;
     }
+
+    public List<Comment> getComments() {
+        Collections.sort(comments);
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
 }
