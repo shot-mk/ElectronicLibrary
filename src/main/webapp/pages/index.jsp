@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Spring Security</title>
+    <title>Electronic Library</title>
 
     <!-- Bootstrap core CSS -->
     <link href="<c:url value="/pages/css/bootstrap.css" />" rel="stylesheet">
@@ -20,9 +20,10 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
     <![endif]-->
+
 </head>
 
 <body>
@@ -32,7 +33,7 @@
     <div class="jumbotron" style="margin-top: 20px;">
         <h1>ElectronicLibrary.com</h1>
 
-        <p class="lead">ElectronicLibrary - this service let you to search, and upload books.</p>
+        <p class="lead">ElectronicLibrary - this service lets you search and download books.</p>
         <sec:authorize access="!isAuthenticated()">
             <p><a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Log In</a></p>
         </sec:authorize>

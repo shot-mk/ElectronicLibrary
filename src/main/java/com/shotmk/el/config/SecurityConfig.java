@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests().antMatchers("/admin/**", "/service/**").access("hasRole('ADMIN')");
-        http.authorizeRequests().antMatchers("/mainpage/**").access("hasRole('ADMIN')").antMatchers("/mainpage/**").access("hasRole('USER')");
+        http.authorizeRequests().antMatchers("/mainpage/**", "/book/**").access("hasRole('ADMIN') or hasRole('USER')");
 
         http.csrf()
                 .disable()

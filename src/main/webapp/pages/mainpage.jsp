@@ -26,7 +26,7 @@
                     </li>
                 </sec:authorize>
                 <li>
-                    <a href="./logout">Logout</a>
+                    <a href="${pageContext.servletContext.contextPath}/logout">Logout</a>
                 </li>
             </ul>
             <br>

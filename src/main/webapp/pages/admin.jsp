@@ -23,7 +23,7 @@
                     <a href="./admin"><strong>Administrating</strong></a>
                 </li>
                 <li>
-                    <a href="./logout">Logout</a>
+                    <a href="${pageContext.servletContext.contextPath}/logout">Logout</a>
                 </li>
             </ul>
             <p></p>
