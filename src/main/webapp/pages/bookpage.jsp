@@ -18,11 +18,11 @@
             </div>
             <ul class="nav nav-tabs nav-justified">
                 <li class="active">
-                    <a href="./mainpage"><strong>MainPage</strong></a>
+                    <a href="${pageContext.servletContext.contextPath}/mainpage"><strong>MainPage</strong></a>
                 </li>
                 <sec:authorize access="hasRole('ADMIN')">
                     <li>
-                        <a href="./admin"><strong>Administrating</strong></a>
+                        <a href="${pageContext.servletContext.contextPath}/admin"><strong>Administrating</strong></a>
                     </li>
                 </sec:authorize>
                 <li>

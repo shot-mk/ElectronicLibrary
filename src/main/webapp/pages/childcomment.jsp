@@ -9,7 +9,7 @@
             ${child.user.login}
         </h4>
 
-        <p><em>${child.creationDate}</em></p>
+        <p><em>${child.getPrettyDate()}</em></p>
 
         <p>${child.comment}</p>
         <br/>

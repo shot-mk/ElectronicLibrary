@@ -2,6 +2,8 @@ package com.shotmk.el.entity;
 
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -86,6 +88,11 @@ public class Comment implements Comparable<Comment> {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getPrettyDate() {
+        DateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        return df.format(this.creationDate);
     }
 
     @Override

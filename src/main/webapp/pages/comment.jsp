@@ -12,7 +12,7 @@
                         ${comment.user.login}
                 </h4>
 
-                <p><em>${comment.creationDate}</em></p>
+                <p><em>${comment.getPrettyDate()}</em></p>
 
                 <p>${comment.comment}</p>
                 <br/>
@@ -22,7 +22,6 @@
                     <jsp:include page="childcomment.jsp"/>
                 </c:forEach>
                 <br/>
-
                 <form role="form" action="../addcomment" method="post">
                     <textarea maxlength="500" rows="2" class="form-control" id="comment" name="comment"
                               required="required"> </textarea>
@@ -33,24 +32,6 @@
                     <button type="submit" class="btn btn-default">Answer</button>
                 </form>
                 <br/>
-
-                    <%--<div class="media">--%>
-                    <%--<a href="#" class="pull-left"><img src="<c:url value="/resources/user.jpg"/>" class="media-object" alt='' /></a>--%>
-                    <%--<div class="media-body">--%>
-                    <%--<h4 class="media-heading">--%>
-                    <%--${child.user.login}--%>
-                    <%--</h4> ${child.comment}--%>
-                    <%--<br>--%>
-                    <%--<form role="form" action="../addcomment" method="post">--%>
-                    <%--<textarea maxlength="500" rows="1"  class="form-control"  name="comment" required="required"> </textarea>--%>
-                    <%--<input class="hidden" name="user" value="<sec:authentication property="principal.username"/>"/>--%>
-                    <%--<input class="hidden" name="bookId" value="${book.id}"/>--%>
-                    <%--<input class="hidden" name="parentId" value="${child.id}"/>--%>
-                    <%--<button type="submit" class="btn btn-default">Answer</button>--%>
-                    <%--</form>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-
             </div>
         </div>
     </c:if>
