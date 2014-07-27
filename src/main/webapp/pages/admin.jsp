@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <c:if test="${fn:length(errorMsgs) > 0}">
+                <c:if test="${not empty errorMsgs}">
 
                     <div class="col-md-4 column">
                         <div class="alert alert-warning alert-dismissable">

@@ -27,7 +27,7 @@ public class Book implements Serializable{
     @Size(max = 500)
     String description;
 
-    @Size(max = 3)
+    @Size(max = 4)
     String format;
 
     String filename;

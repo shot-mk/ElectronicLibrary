@@ -33,8 +33,6 @@ public class AdminBookController {
 
     private List<String> errorMsgs = new ArrayList<String>();
 
-    private Integer BOOK_MAX_SIZE = 20000000;
-
     private Integer IMAGE_MAX_WIDTH = 600;
 
     private Integer IMAGE_MAX_HEIGHT = 800;
@@ -47,14 +45,12 @@ public class AdminBookController {
         allowedBookExtensions.add("txt");
         allowedBookExtensions.add("rtf");
         allowedBookExtensions.add("doc");
+        allowedBookExtensions.add("docx");
         allowedBookExtensions.add("odt");
         allowedBookExtensions.add("pdf");
         this.allowedImageExtensions = new HashSet<>();
         allowedImageExtensions.add("jpg");
         allowedImageExtensions.add("jpeg");
-        allowedBookExtensions.add("bmp");
-        allowedBookExtensions.add("png");
-
     }
 
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
@@ -83,13 +79,11 @@ public class AdminBookController {
     }
 
 
-    private void bookUploadAndValidate(@RequestParam("book") MultipartFile book, FileWrapper bookWrapper, RedirectAttributes attributes) {
-        String extension = FilenameUtils.getExtension(book.getOriginalFilename());
+    private void bookUploadAndValidate(MultipartFile book, FileWrapper bookWrapper, RedirectAttributes attributes) {
+        String extension = FilenameUtils.getExtension(book.getOriginalFilename()).toLowerCase();
+
         if (!this.allowedBookExtensions.contains(extension)) {
             addError("Incorrect file extension - only txt, rtf, doc, odt, pdf are allowed.");
-            attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
-        } else if (book.getSize() > BOOK_MAX_SIZE) {
-            addError("File is too big. File size must be less then 20Mb.");
             attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
         } else {
             String filename = book.getOriginalFilename();
@@ -108,9 +102,9 @@ public class AdminBookController {
 
     private void imageUploadAndValidate(MultipartFile image, FileWrapper imageWrapper, RedirectAttributes attributes) {
         try {
-            String extension = FilenameUtils.getExtension(image.getOriginalFilename());
+            String extension = FilenameUtils.getExtension(image.getOriginalFilename()).toLowerCase();
             if (!this.allowedImageExtensions.contains(extension)) {
-                addError("Incorrect image extension - only jpg, bmp, png are allowed.");
+                addError("Incorrect image extension - only jpg is allowed.");
                 attributes.addFlashAttribute("errorMsgs", this.errorMsgs);
                 return;
             }

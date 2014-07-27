@@ -28,7 +28,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
-
     @Bean
     public UrlBasedViewResolver setupViewResolver() {
         UrlBasedViewResolver resolver = new UrlBasedViewResolver();
@@ -41,7 +40,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver mr = new CommonsMultipartResolver();
-        mr.setMaxUploadSize(20000000);
+        mr.setMaxUploadSize(20971520);
         return mr;
     }
 
@@ -49,9 +48,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public ByteArrayHttpMessageConverter setupHttpMethodConverter() {
         ByteArrayHttpMessageConverter converter = new ByteArrayHttpMessageConverter();
         List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
-        supportedMediaTypes.add(MediaType.IMAGE_GIF);
         supportedMediaTypes.add(MediaType.IMAGE_JPEG);
-        supportedMediaTypes.add(MediaType.IMAGE_PNG);
         converter.setSupportedMediaTypes(supportedMediaTypes);
         return converter;
     }
