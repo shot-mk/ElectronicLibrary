@@ -46,7 +46,7 @@
                             <p>File name : ${book.filename}</p>
 
                             <p>File size : ${book.size} bytes</p>
-                            <a href="../upload/${book.id}" class="btn btn-lg btn-info" type="button">Upload</a>
+                            <a href="../download/${book.id}" class="btn btn-lg btn-info" type="button">Upload</a>
                         </div>
                         <div class="col-md-8 column">
                             <br><br><br>

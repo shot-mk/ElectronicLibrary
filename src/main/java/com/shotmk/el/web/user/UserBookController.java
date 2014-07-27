@@ -46,7 +46,7 @@ public class UserBookController {
     }
 
 
-    @RequestMapping("/upload/{bookId}")
+    @RequestMapping("/download/{bookId}")
     public String download(@PathVariable("bookId")
                            Integer bookId, HttpServletResponse response) {
 

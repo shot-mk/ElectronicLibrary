@@ -59,6 +59,7 @@ public class AdminBookController {
 
     @RequestMapping(value = "/addbook", method = RequestMethod.POST)
     public String addBook(RedirectAttributes attributes, HttpServletRequest req, @RequestParam("book") MultipartFile book, @RequestParam("image") MultipartFile image) throws ServletException {
+        clearMessages();
         String title = req.getParameter("bookName");
         String author = req.getParameter("author");
         String publisher = req.getParameter("publisher");
@@ -105,10 +106,8 @@ public class AdminBookController {
         }
     }
 
-    private void imageUploadAndValidate(@RequestParam("image") MultipartFile image, FileWrapper imageWrapper, RedirectAttributes attributes) {
-
+    private void imageUploadAndValidate(MultipartFile image, FileWrapper imageWrapper, RedirectAttributes attributes) {
         try {
-
             String extension = FilenameUtils.getExtension(image.getOriginalFilename());
             if (!this.allowedImageExtensions.contains(extension)) {
                 addError("Incorrect image extension - only jpg, bmp, png are allowed.");
@@ -138,16 +137,16 @@ public class AdminBookController {
         this.errorMsgs.add(msg);
     }
 
-    @RequestMapping(value = "/getbooks", method = RequestMethod.POST)
-    public String getBooks() {
-        return "redirect:/index";
-    }
 
     @RequestMapping(value = "/deletebook", method = RequestMethod.POST)
     public String deleteBook(@RequestParam("deleteBook") int id) {
         Book book = bookService.getBook(id);
         bookService.deleteBook(book);
         return "redirect:/admin";
+    }
+
+    private void clearMessages() {
+        this.errorMsgs = new ArrayList<>();
     }
 
 
