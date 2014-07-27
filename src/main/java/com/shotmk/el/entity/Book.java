@@ -45,6 +45,9 @@ public class Book implements Serializable {
 
     private double size;
 
+    @Column(nullable = false)
+    private int rate;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "book")
     private List<Comment> comments;
 
@@ -66,6 +69,7 @@ public class Book implements Serializable {
         this.image = image;
         this.size = size;
         this.tags = tags;
+        this.rate = 0;
     }
 
     public int getId() {

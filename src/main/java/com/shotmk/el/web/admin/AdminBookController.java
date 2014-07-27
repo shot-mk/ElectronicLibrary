@@ -3,6 +3,7 @@ package com.shotmk.el.web.admin;
 import com.shotmk.el.entity.Book;
 import com.shotmk.el.entity.Tag;
 import com.shotmk.el.services.BookService;
+import com.shotmk.el.services.TagService;
 import com.shotmk.el.wrappers.FileWrapper;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class AdminBookController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private TagService tagService;
+
     public AdminBookController() {
         this.allowedBookExtensions = new HashSet<>();
         allowedBookExtensions.add("txt");
@@ -63,7 +67,12 @@ public class AdminBookController {
         List<Tag> tagList = new ArrayList<>();
         for (String tag : stringTagList) {
             tag = tag.replaceAll("\\s+", "");
-            tagList.add(new Tag(tag));
+            Tag temp = tagService.getTagByTagstring(tag);
+            if (temp != null) {
+                tagList.add(temp);
+            } else {
+                tagList.add(new Tag(tag));
+            }
         }
         FileWrapper fileWrapper = new FileWrapper();
         FileWrapper imageWrapper = new FileWrapper();
