@@ -2,9 +2,11 @@ package com.shotmk.el.web.user;
 
 import com.shotmk.el.entity.Book;
 import com.shotmk.el.entity.Comment;
+import com.shotmk.el.entity.Tag;
 import com.shotmk.el.entity.User;
 import com.shotmk.el.services.BookService;
 import com.shotmk.el.services.CommentService;
+import com.shotmk.el.services.TagService;
 import com.shotmk.el.services.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class UserBookController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TagService tagService;
 
 
     @RequestMapping("/show/{bookId}")
@@ -90,6 +94,15 @@ public class UserBookController {
         List<Book> bookList = bookService.findByDescription(description);
         model.addAttribute("bookList", bookList);
         return "findbookpage";
-
     }
+
+    @RequestMapping(value = "/findbook/tag/{tag}", method = {RequestMethod.GET, RequestMethod.POST})
+    public String findBookByTag(@PathVariable("tag") String tag, Model model) {
+        Tag tTag = tagService.getTagByTagstring(tag);
+        List<Book> bookList = bookService.findBooksByTag(tTag);
+        model.addAttribute("bookList", bookList);
+        return "findbookpage";
+    }
+
+
 }

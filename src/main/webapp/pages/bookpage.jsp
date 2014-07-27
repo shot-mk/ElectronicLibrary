@@ -56,6 +56,11 @@
                             <p>Author : ${book.author}</p>
 
                             <p>Publisher : ${book.publisher}</p>
+
+                            <p>Tags : </p>
+                            <c:forEach var="tag" items="${book.tags}">
+                                <a href="${pageContext.servletContext.contextPath}/book/findbook/tag/${tag.tag}">${tag.tag}</a>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>

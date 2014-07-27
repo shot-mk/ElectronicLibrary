@@ -14,6 +14,7 @@ public class AdminPageController {
     @Autowired
     BookService bookService;
 
+
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
     public String postStart(Model model) {
         model.addAttribute("bookList", bookService.getBookList());

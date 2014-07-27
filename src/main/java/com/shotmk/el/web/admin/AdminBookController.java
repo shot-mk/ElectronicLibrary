@@ -1,6 +1,7 @@
 package com.shotmk.el.web.admin;
 
 import com.shotmk.el.entity.Book;
+import com.shotmk.el.entity.Tag;
 import com.shotmk.el.services.BookService;
 import com.shotmk.el.wrappers.FileWrapper;
 import org.apache.commons.io.FilenameUtils;
@@ -18,10 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/service")
@@ -60,6 +58,13 @@ public class AdminBookController {
         String author = req.getParameter("author");
         String publisher = req.getParameter("publisher");
         String description = req.getParameter("description");
+        String tags = req.getParameter("tags");
+        List<String> stringTagList = new ArrayList(Arrays.asList(tags.split(",")));
+        List<Tag> tagList = new ArrayList<>();
+        for (String tag : stringTagList) {
+            tag = tag.replaceAll("\\s+", "");
+            tagList.add(new Tag(tag));
+        }
         FileWrapper fileWrapper = new FileWrapper();
         FileWrapper imageWrapper = new FileWrapper();
         bookUploadAndValidate(book, fileWrapper, attributes);
@@ -70,7 +75,7 @@ public class AdminBookController {
             String filename = fileWrapper.getFileName();
             byte[] aImage = imageWrapper.getFile();
             int size = aBook.length;
-            Book newBook = new Book(title, publisher, author, description, extension, filename, aBook, aImage, size);
+            Book newBook = new Book(title, publisher, author, description, extension, filename, aBook, aImage, size, tagList);
             bookService.addBook(newBook);
             String successMessage = "Book successfully added";
             attributes.addFlashAttribute("successMsg", successMessage);

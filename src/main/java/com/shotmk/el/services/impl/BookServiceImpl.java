@@ -2,6 +2,7 @@ package com.shotmk.el.services.impl;
 
 
 import com.shotmk.el.entity.Book;
+import com.shotmk.el.entity.Tag;
 import com.shotmk.el.repository.BookRepository;
 import com.shotmk.el.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,5 +62,16 @@ public class BookServiceImpl implements BookService {
         PageRequest request =
                 new PageRequest(pageNumber - 1, PAGE_SIZE);
         return bookRepository.findAll(request);
+    }
+
+    public List<Book> findBooksByTag(Tag tag) {
+        List<Book> allBook = this.getBookList();
+        List<Book> resultList = new ArrayList<>();
+        for (Book book : allBook) {
+            if (book.getTags().contains(tag)) {
+                resultList.add(book);
+            }
+        }
+        return resultList;
     }
 }

@@ -33,44 +33,6 @@
 
             <div class="row clearfix">
                 <div class="col-md-12 column">
-                    <form class="form-horizontal" role="form"
-                          action="${pageContext.servletContext.contextPath}/book/findbook" method="post">
-                        <h3>Find Book </h3>
-
-                        <div class="form-group col-md-6">
-                            <label for="findBook" class="control-label"> Enter Book Name</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="findBook" name="bookName"
-                                       required="required"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary" name="action" value="findBook">Find
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <br/>
-
-                    <form class="form-horizontal" role="form"
-                          action="${pageContext.servletContext.contextPath}/book/findbook/description" method="post">
-                        <div class="form-group col-md-6">
-                            <label for="findBookDescr" class="control-label"> Enter Book Description</label>
-
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="findBookDescr" name="bookDescription"
-                                       required="required"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary" name="action" value="findBookDescr">Find
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <br/>
 

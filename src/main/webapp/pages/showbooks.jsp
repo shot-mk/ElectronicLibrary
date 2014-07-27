@@ -1,14 +1,13 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <table class="table table-condensed table-bordered table-hover">
     <thead>
     <tr>
         <th>
-           Id
+            Id
         </th>
         <th>
-           Title
+            Title
         </th>
         <th>
             Info
@@ -61,6 +60,10 @@
 
                                     <p><strong>File Name : </strong> ${book.filename} </p>
 
+                                    <h2> Tags :</h2>
+
+                                    <p><c:forEach var="tag" items="${book.tags}">${tag.tag} </c:forEach></p>
+
 
                                 </div>
                             </div>
@@ -74,7 +77,8 @@
             <td>
                 <form action="service/deletebook" method="post">
                     <input class="hidden" name="deleteBook" value="${book.id}"/>
-                    <button type="submit" class="btn btn-sm btn-default" name="action" value="deleteBook"><span class="glyphicon glyphicon-trash"></span></button>
+                    <button type="submit" class="btn btn-sm btn-default" name="action" value="deleteBook"><span
+                            class="glyphicon glyphicon-trash"></span></button>
                 </form>
 
             </td>

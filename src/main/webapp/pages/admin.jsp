@@ -68,7 +68,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="book" class="col-sm-4 control-label">Book</label>
+                                            <label for="tags" class="col-sm-4 control-label">Tags</label>
+
+                                            <div class="col-sm-8">
+                                                <textarea maxlength="500" rows="2" class="form-control" id="tags"
+                                                          name="tags" required="required"> </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="book" class="col-sm-4 control-label">Book</label>
 
                                             <div class="col-sm-8">
                                                 <input type="file" class="form-control" id="book" name="book" required="required"/>

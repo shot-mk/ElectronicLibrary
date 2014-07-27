@@ -15,5 +15,4 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
     @Query("select b from Book b where b.description like %:description%")
     List<Book> findByDescription(@Param("description") String description);
 
-
 }

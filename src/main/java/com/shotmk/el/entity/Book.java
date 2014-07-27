@@ -1,6 +1,8 @@
 package com.shotmk.el.entity;
 
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -11,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "book")
-public class Book implements Serializable{
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,10 +48,14 @@ public class Book implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "book")
     private List<Comment> comments;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Tag> tags;
+
     public Book() {
     }
 
-    public Book(String name, String publisher, String author, String description, String format, String filename, byte[] book, byte[] image, double size) {
+    public Book(String name, String publisher, String author, String description, String format, String filename, byte[] book, byte[] image, double size, List<Tag> tags) {
         this.name = name;
         this.publisher = publisher;
         this.author = author;
@@ -59,6 +65,7 @@ public class Book implements Serializable{
         this.book = book;
         this.image = image;
         this.size = size;
+        this.tags = tags;
     }
 
     public int getId() {
@@ -150,4 +157,11 @@ public class Book implements Serializable{
         this.comments = comments;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 }
