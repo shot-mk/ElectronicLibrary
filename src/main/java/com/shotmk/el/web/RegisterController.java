@@ -8,6 +8,7 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,8 +25,13 @@ public class RegisterController {
     }
 
     @RequestMapping("/reguser")
-    public String register(HttpServletRequest request) {
+    public String register(HttpServletRequest request, RedirectAttributes attributes) {
         String login = request.getParameter("login");
+        User tempUser = userService.getUser(login);
+        if (tempUser != null) {
+            attributes.addFlashAttribute("userExist", "exist");
+            return "redirect:/register";
+        }
         String password = request.getParameter("password");
         ShaPasswordEncoder encoder = new ShaPasswordEncoder();
         String encPassword = encoder.encodePassword(password, null);

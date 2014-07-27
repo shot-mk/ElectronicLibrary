@@ -16,6 +16,9 @@
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     </form>
+    <c:if test="${not empty userExist}">
+        <p>User with this login exist. Use another one.</p>
+    </c:if>
 </div>
 
 </body>
