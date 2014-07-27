@@ -17,33 +17,33 @@ public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    private int id;
 
     @Size(max = 40)
-    String name;
+    private String name;
 
-    String publisher;
+    private String publisher;
 
-    String author;
+    private String author;
 
     @Size(max = 500)
-    String description;
+    private String description;
 
     @Size(max = 4)
-    String format;
+    private String format;
 
-    String filename;
+    private String filename;
 
     @Lob
     @Column(length = 20000000)
-    byte[] book;
+    private byte[] book;
 
 
     @Column(length = 100000)
     @Type(type = "image")
-    byte[] image;
+    private byte[] image;
 
-    double size;
+    private double size;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "book")
     private List<Comment> comments;
