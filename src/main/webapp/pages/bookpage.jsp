@@ -61,6 +61,21 @@
                             <c:forEach var="tag" items="${book.tags}">
                                 <a href="${pageContext.servletContext.contextPath}/book/findbook/tag/${tag.tag}">${tag.tag}</a>
                             </c:forEach>
+                            <br/>
+
+                            <form role="form" method="post">
+                                <input class="hidden" name="user"
+                                       value="<sec:authentication property="principal.username"/>"/>
+                                <input class="hidden" name="bookId" value="${book.id}"/>
+                                <button type="submit" class="btn btn-default"
+                                        formaction="${pageContext.servletContext.contextPath}/book/rate/increment">+
+                                </button>
+                                ${book.rate}
+                                <button type="submit" class="btn btn-default"
+                                        formaction="${pageContext.servletContext.contextPath}/book/rate/decrement">-
+                                </button>
+                            </form>
+
                         </div>
                     </div>
                 </div>

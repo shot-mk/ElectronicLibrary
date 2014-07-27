@@ -1,13 +1,7 @@
 package com.shotmk.el.web.user;
 
-import com.shotmk.el.entity.Book;
-import com.shotmk.el.entity.Comment;
-import com.shotmk.el.entity.Tag;
-import com.shotmk.el.entity.User;
-import com.shotmk.el.services.BookService;
-import com.shotmk.el.services.CommentService;
-import com.shotmk.el.services.TagService;
-import com.shotmk.el.services.UserService;
+import com.shotmk.el.entity.*;
+import com.shotmk.el.services.*;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +32,9 @@ public class UserBookController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private RateService rateService;
 
 
     @RequestMapping("/show/{bookId}")
@@ -77,6 +74,26 @@ public class UserBookController {
         String commentString = request.getParameter("comment");
         Comment comment = new Comment(parent, book, user, commentString);
         commentService.addComment(comment);
+        return "redirect:/book/show/" + book.getId();
+    }
+
+    @RequestMapping("/rate/{increment}")
+    public String rate(HttpServletRequest request, @PathVariable("increment") String increment) {
+        Book book = bookService.getBook(Integer.valueOf(request.getParameter("bookId")));
+        User user = userService.getUser(request.getParameter("user"));
+        Rate tempRate = rateService.getExistRate(user.getLogin(), book.getId());
+        if (tempRate != null) {
+            return "redirect:/book/show/" + book.getId();
+        } else {
+            boolean incr = increment.equals("increment") ? true : false;
+            rateService.addRate(new Rate(user, book, incr));
+            if (incr) {
+                book.incrementRate();
+            } else {
+                book.decrementRate();
+            }
+            bookService.addBook(book);
+        }
         return "redirect:/book/show/" + book.getId();
     }
 

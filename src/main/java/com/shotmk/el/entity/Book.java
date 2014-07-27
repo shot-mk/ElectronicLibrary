@@ -35,7 +35,7 @@ public class Book implements Serializable {
     private String filename;
 
     @Lob
-    @Column(length = 20000000)
+    @Column(length = 20971520)
     private byte[] book;
 
 
@@ -168,4 +168,21 @@ public class Book implements Serializable {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    public int getRate() {
+        return rate;
+    }
+
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    public void incrementRate() {
+        this.rate++;
+    }
+
+    public void decrementRate() {
+        this.rate--;
+    }
+
 }
